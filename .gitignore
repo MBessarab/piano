@@ -1,0 +1,25 @@
+# Python interpreter
+*.py[cod]
+/__pycache__/
+/venv/
+/vert/
+/share/
+/docs/
+.venv
+
+*.map
+
+/static/gis/dist/
+
+# Local configurations
+*/settings_instance.py
+
+# Server static
+static_root
+
+/node_modules/
+dist
+
+.idea
+
+/.pytest_cache/
