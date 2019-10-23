@@ -12,20 +12,34 @@ class InfoProperty(models.Model):
         db_table = 'info_property'
         verbose_name = 'Свойства компании'
 
+#
+# class Info(models.Model):
+#
+#     name = models.CharField()
+#
+#     address = models.CharField()
+#
+#     phone_number = models.CharField()
+#
+#     email = models.CharField()
+#
+#     socials = JSONField()
+#
+#     class Meta:
+#         db_table = ''
+#         verbose_name = 'Piano'
 
-class Info(models.Model):
 
-    name = models.CharField()
+class Partition(models.Model):
 
-    address = models.CharField()
+    title = models.CharField()
 
-    phone_number = models.CharField()
+    active = models.BooleanField(
+        default=True
+    )
 
-    email = models.CharField()
-
-    partitions = JSONField()
+    order = models.PositiveIntegerField()
 
     class Meta:
-        db_table = 'company_info'
-        verbose_name = 'Piano'
-
+        db_table = 'partition'
+        verbose_name = 'Разделы'

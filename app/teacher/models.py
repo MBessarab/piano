@@ -1,3 +1,8 @@
-from django.db import models
+from app.models import PartitionArticleAbs
 
-# Create your models here.
+
+class Teacher(PartitionArticleAbs):
+
+    class Meta(PartitionArticleAbs.Meta):
+        db_table = 'teacher'
+        verbose_name = 'Преподаватели'

@@ -1,3 +1,8 @@
-from django.db import models
+from app.models import PartitionArticleAbs
 
-# Create your models here.
+
+class News(PartitionArticleAbs):
+
+    class Meta(PartitionArticleAbs.Meta):
+        db_table = 'News'
+        verbose_name = 'Новости'
