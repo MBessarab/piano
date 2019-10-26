@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
+
 from app import settings
 from app.gift import urls as gift_urls
 from app.teacher import urls as teacher_urls
@@ -28,7 +30,7 @@ from app.claim import urls as claim_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path(r'', TemplateView.as_view(template_name='registry/index.html')),
+    path(r'', TemplateView.as_view(template_name='index.html')),
     path(r'api/gift/', include(gift_urls)),
     path(r'api/teacher/', include(teacher_urls)),
     path(r'api/price/', include(price_urls)),
