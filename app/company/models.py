@@ -1,45 +1,74 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 
 
-class InfoProperty(models.Model):
+class ContactProperty(models.Model):
 
-    key = models.CharField()
+    key = models.CharField(
+        max_length=15,
+        verbose_name='Ключ',
+    )
 
-    value = models.CharField()
+    value = models.TextField(
+        verbose_name='Значение',
+    )
+
+    order = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        verbose_name='Сортировка',
+    )
+
+    def __str__(self):
+        return self.key
 
     class Meta:
-        db_table = 'info_property'
+        db_table = 'contact_property'
         verbose_name = 'Свойства компании'
-
-#
-# class Info(models.Model):
-#
-#     name = models.CharField()
-#
-#     address = models.CharField()
-#
-#     phone_number = models.CharField()
-#
-#     email = models.CharField()
-#
-#     socials = JSONField()
-#
-#     class Meta:
-#         db_table = ''
-#         verbose_name = 'Piano'
+        verbose_name_plural = 'Свойства компании'
 
 
 class Partition(models.Model):
 
-    title = models.CharField()
-
-    active = models.BooleanField(
-        default=True
+    title = models.CharField(
+        max_length=20,
+        verbose_name='Название',
     )
 
-    order = models.PositiveIntegerField()
+    system_name = models.CharField(
+        max_length=20,
+        unique=True,
+        verbose_name='Системное имя'
+    )
+
+    active = models.BooleanField(
+        default=True,
+    )
+
+    order = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        verbose_name='Очередь',
+    )
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         db_table = 'partition'
         verbose_name = 'Разделы'
+        verbose_name_plural = 'Разделы'
+
+
+class MainPage(models.Model):
+    partition = models.ForeignKey(
+        Partition,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.partition.title
+
+    class Meta:
+        db_table = 'main_page'
+        verbose_name = 'Главная страница'
+        verbose_name_plural = 'Главная страница'

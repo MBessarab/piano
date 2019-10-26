@@ -15,6 +15,7 @@ psycopg2-binary = "*"
 psycopg2 = "*"
 django-url-filter = "*"
 django-filter = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
