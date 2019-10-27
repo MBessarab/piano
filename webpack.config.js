@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const src_path = './static/src/components/';
+const src_path = './static/src/';
 
 module.exports = {
     context: __dirname,
@@ -60,6 +60,9 @@ module.exports = {
     resolve: {
         alias: {
             static: path.resolve(__dirname, 'static/src'),
+            main: path.resolve(__dirname, 'static/src/components/main'),
+            header: path.resolve(__dirname, 'static/src/components/header'),
+            about: path.resolve(__dirname, 'static/src/components/about'),
         },
         extensions: [".js", '.css', '.styl', '.hbs']
     },
