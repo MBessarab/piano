@@ -2,6 +2,9 @@ import Mn from 'backbone.marionette';
 import _ from 'underscore';
 import MainViewTemplate from './template/main.hbs';
 import HeaderView from 'header';
+import $ from "jquery";
+// import ContentView from 'content';
+// import FooterView from 'footer';
 
 export default class extends Mn.View {
     constructor(option={}){
@@ -14,36 +17,75 @@ export default class extends Mn.View {
                 footer: '.footer-container',
             }
         });
-        super(option)
+        super(option);
+        this.phone = "";
     }
 
-    initHeader(){
-        this.headerView = new HeaderView();
-        this.showChildView('header', this.headerView);
+    initHeader(partitions, self){
+        self.showChildView('header', new HeaderView({
+            partitions: partitions,
+            phone: self.phone,
+        }));
     }
 
-    initContent(){
-        // this.contentView = new ContentView();
-        // this.showChildView('content', this.contentView)
+    initContent(allowPartitions){
+        this.showChildView('content', new ContentView({
+            allowPartitions: allowPartitions,
+        }));
     }
 
-    initFooter(){
-        // this.footerView = new FooterView();
-        // this.showChildView('footer', this.footerView)
+    // initFooter(){
+    //     this.showChildView('footer', new FooterView());
+    // }
+
+    initAllowPartitions(initHeader, initContent){
+         return $.ajax(`${location.origin}/api/company/partition?active=True`, {
+            method: 'GET',
+            success: parts => {
+                let sorted_parts = _.sortBy(parts, (part) => part.order)
+                initHeader(sorted_parts, this);
+                // initContent(sorted_parts, this);
+            }
+        })
+    }
+
+    loadPhoneNumber(){
+        return $.ajax(`${location.origin}/api/company/contact?key=phone_number`, {
+            method: "GET",
+        })
     }
 
     onRender(){
-        this.initHeader();
-        this.initContent();
-        this.initFooter();
+        this.loadPhoneNumber()
+            .then((data) => {
+                this.phone = data[0].value;
+                return this.initAllowPartitions(
+                        this.initHeader,
+                        this.initContent
+                    )
+                }
+            )
+        .then(() => {
+            return $.ajax(`${location.origin}/api/company/main_page`, {
+                method: 'GET',
+            });
+        }).then((data) => this.switcherView(data.partition))
+
+        // this.initFooter();
     }
 
-    switchMenu(view){
-
+    switchViewContent(partition){
+        this.getChildView('content')
+            .switchView(partition);
     }
 
-    switcherView(view){
-        this.switchMenu(view);
-        this.showChildView('content', view);
+    switchViewHeader(partition){
+        this.getChildView('header')
+            .switchView(partition);
+    }
+
+    switcherView(partition){
+        this.switchViewContent(partition);
+        this.switchViewHeader(partition)
     }
 }

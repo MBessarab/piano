@@ -7,7 +7,7 @@ export default class extends Mn.View {
     constructor(option={}){
         _.defaults(option, {
             template: FooterTemplate,
-            className: 'footer-container',
+            className: 'footer-container-view',
             regions: {
                 menu: '.menu-container',
             }

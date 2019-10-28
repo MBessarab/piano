@@ -5,7 +5,6 @@ import 'bootstrap';
 import View from 'main';
 import './styles.styl';
 import _ from 'underscore';
-import AboutView from "about";
 
 
 class App extends Mn.Application {
@@ -27,33 +26,38 @@ class Router extends Backbone.Router {
 	constructor(option={}){
         _.defaults(option, {
             routes: {
-                '' : 'index',
                 'about' : 'about',
+                'course' : 'about',
+                'price' : 'about',
+                'teacher' : 'about',
+                'news' : 'about',
+                'gift' : 'about',
             }
         });
         super(option);
-        this.partitionHandler = {
-            about: this.aboutHandler,
-            // price: this.priceHandler,
-            // course: this.courseHandler,
-            // gift: this.giftHandler,
-            // news: this.newsHandler,
-            // teacher: this.teachHandler,
-        }
     }
 
-    aboutHandler(){
-	    appView.switcherView(new AboutView());
+	about(){
+	    appView.switcherView('about')
     }
 
-	index() {
-		$.ajax(`${location.origin}/api/company/main_page`, {
-            method: 'GET',
-            success: (data) => this._main_page_success(data)
-        })
-	}
+	course(){
+	    appView.switcherView('course')
+    }
 
-	_main_page_success(data){
-        this.partitionHandler[data.partition]()
+	gift(){
+	    appView.switcherView('gift')
+    }
+
+	teacher(){
+	    appView.switcherView('teacher')
+    }
+
+	price(){
+	    appView.switcherView('price')
+    }
+
+	news(){
+	    appView.switcherView('news')
     }
 }

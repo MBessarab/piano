@@ -10,16 +10,24 @@ export default class extends Mn.View {
             className: 'header-container-view',
             regions: {
                 menu: '.menu-container',
+            },
+            ui: {
+                make_claim: '.make-claim-btn'
             }
         });
-        super(option)
+        super(option);
+        this.partitions = option['partitions'];
+        this.phone = option['phone'];
     }
 
-    initMenu(){
-        // this.showChildView('menu', new HeaderView())
+    templateContext(){
+        return {
+            partitions: this.partitions,
+            phone: this.phone,
+        }
     }
 
-    onRender(){
-        this.initMenu();
+    switchView(partition){
+    // дизайн кнопок
     }
 }

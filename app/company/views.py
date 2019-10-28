@@ -3,6 +3,7 @@ from http import HTTPStatus
 
 from rest_framework import viewsets
 from rest_framework.response import Response
+from url_filter.integrations.drf import DjangoFilterBackend
 
 from app.company.models import ContactProperty, Partition, MainPage
 from app.company.serializers import ContactPropertySerializer, PartitionSerializer, MainPageSerializer
@@ -11,11 +12,15 @@ from app.company.serializers import ContactPropertySerializer, PartitionSerializ
 class ContactPropertyView(viewsets.ModelViewSet):
     queryset = ContactProperty.objects.all()
     serializer_class = ContactPropertySerializer
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['key',]
 
 
 class PartitionView(viewsets.ModelViewSet):
     queryset = Partition.objects.all()
     serializer_class = PartitionSerializer
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['active',]
 
 
 class MainPageView(viewsets.ModelViewSet):
