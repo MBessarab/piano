@@ -1,8 +1,8 @@
 import Mn from 'backbone.marionette';
 import _ from 'underscore';
 import ContentTemplate from './template/content.hbs';
-import AboutView from 'about';
 // import PriceView from 'price';
+import AboutView from 'about';
 import CourseView from 'course';
 import GiftView from 'gift';
 import NewsViews from 'news';
@@ -19,66 +19,66 @@ export default class extends Mn.View {
         });
         super(option);
         this.partitionGetter = {
-            about: this.getAboutView,
-            // price: this.getPriceView,
-            course: this.getCourseView,
-            gift: this.getGiftView,
-            news: this.getNewsView,
-            teacher: this.getTeacherView,
+            about: this.getAboutView(this),
+            // price: this.getPriceView(this),
+            course: this.getCourseView(this),
+            gift: this.getGiftView(this),
+            news: this.getNewsView(this),
+            teacher: this.getTeacherView(this),
         };
         this.partitionViews = {}
     }
 
-    async getAboutView(){
-        if(!this.partitionViews['about']){
-            this.partitionViews['about'] = new AboutView();
-            await this.partitionViews['about'].loadInfo();
+    async getAboutView(self){
+        if(!self.partitionViews['about']){
+            self.partitionViews['about'] = new AboutView();
+            await self.partitionViews['about'].loadInfo();
         }
-        return this.partitionViews['about']
+        return self.partitionViews['about']
     }
 
-    // getPriceView(){
-    //     if(!this.partitionViews['price']){
-    //         this.partitionViews['price'] = new PriceView();
-    //         this.partitionViews['price'].loadInfo();
+    // getPriceView(self){
+    //     if(!self.partitionViews['price']){
+    //         self.partitionViews['price'] = new PriceView();
+    //         self.partitionViews['price'].loadInfo();
     //     }
-    //     return this.partitionViews['price']
+    //     return self.partitionViews['price']
     // }
 
-    getCourseView(){
-        if(!this.partitionViews['course']){
-            this.partitionViews['course'] = new CourseView();
-            this.partitionViews['course'].loadInfo();
+    getCourseView(self){
+        if(!self.partitionViews['course']){
+            self.partitionViews['course'] = new CourseView();
+            self.partitionViews['course'].loadInfo();
         }
-        return this.partitionViews['course']
+        return self.partitionViews['course']
     }
 
-    getGiftView(){
-        if(!this.partitionViews['gift']){
-            this.partitionViews['gift'] = new GiftView();
-            this.partitionViews['gift'].loadInfo();
+    getGiftView(self){
+        if(!self.partitionViews['gift']){
+            self.partitionViews['gift'] = new GiftView();
+            self.partitionViews['gift'].loadInfo();
         }
-        return this.partitionViews['gift']
+        return self.partitionViews['gift']
     }
 
-    getNewsView(){
-        if(!this.partitionViews['news']){
-            this.partitionViews['news'] = new NewsViews();
-            this.partitionViews['news'].loadInfo();
+    getNewsView(self){
+        if(!self.partitionViews['news']){
+            self.partitionViews['news'] = new NewsViews();
+            self.partitionViews['news'].loadInfo();
         }
-        return this.partitionViews['news'];
+        return self.partitionViews['news'];
     }
 
-    getTeacherView(){
-        if(!this.partitionViews['teacher']){
-            this.partitionViews['teacher'] = new TeacherView();
-            this.partitionViews['teacher'].loadInfo();
+    getTeacherView(self){
+        if(!self.partitionViews['teacher']){
+            self.partitionViews['teacher'] = new TeacherView();
+            self.partitionViews['teacher'].loadInfo();
         }
-        return this.partitionViews['teacher']
+        return self.partitionViews['teacher']
     }
 
     async getContentView(partition){
-        await this.partitionGetter[partition]() || console.error("Нет данной категории на фронте")
+        await this.partitionGetter[partition] || console.error("Нет данной категории на фронте")
     }
 
     switchView(partition){

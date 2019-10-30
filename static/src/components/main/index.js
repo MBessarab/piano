@@ -27,8 +27,8 @@ export default class extends Mn.View {
         }));
     }
 
-    initContent(allowPartitions){
-        this.showChildView('content', new ContentView({
+    initContent(allowPartitions, self){
+        self.showChildView('content', new ContentView({
             allowPartitions: allowPartitions,
         }));
     }
@@ -45,7 +45,7 @@ export default class extends Mn.View {
             success: parts => {
                 let sorted_parts = _.sortBy(parts, (part) => part.order)
                 initHeader(sorted_parts, this);
-                // initContent(sorted_parts, this);
+                initContent(sorted_parts, this);
             }
         })
     }
@@ -86,6 +86,7 @@ export default class extends Mn.View {
     }
 
     switcherView(partition){
+        debugger
         this.switchViewContent(partition);
         this.switchViewHeader(partition)
     }

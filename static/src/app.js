@@ -27,11 +27,11 @@ class Router extends Backbone.Router {
         _.defaults(option, {
             routes: {
                 'about' : 'about',
-                'course' : 'about',
-                'price' : 'about',
-                'teacher' : 'about',
-                'news' : 'about',
-                'gift' : 'about',
+                'course' : 'course',
+                'price' : 'price',
+                'teacher' : 'teacher',
+                'news' : 'news',
+                'gift' : 'gift',
             }
         });
         super(option);
