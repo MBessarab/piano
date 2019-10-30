@@ -3,7 +3,7 @@ import _ from 'underscore';
 import MainViewTemplate from './template/main.hbs';
 import HeaderView from 'header';
 import $ from "jquery";
-// import ContentView from 'content';
+import ContentView from 'content';
 // import FooterView from 'footer';
 
 export default class extends Mn.View {
@@ -61,7 +61,8 @@ export default class extends Mn.View {
                 this.phone = data[0].value;
                 return this.initAllowPartitions(
                         this.initHeader,
-                        this.initContent
+                        this.initContent,
+                        // this.initFooter
                     )
                 }
             )
@@ -70,8 +71,6 @@ export default class extends Mn.View {
                 method: 'GET',
             });
         }).then((data) => this.switcherView(data.partition))
-
-        // this.initFooter();
     }
 
     switchViewContent(partition){

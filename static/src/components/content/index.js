@@ -1,12 +1,12 @@
 import Mn from 'backbone.marionette';
 import _ from 'underscore';
 import ContentTemplate from './template/content.hbs';
-import AboutView from 'about'
-// import PriceView from 'price'
-// import CourseView from 'course'
-// import GiftView from 'gift'
-// import NewsView from 'news'
-// import TeacherView from 'teacher'
+import AboutView from 'about';
+// import PriceView from 'price';
+// import CourseView from 'course';
+// import GiftView from 'gift';
+import NewsViews from 'news';
+// import TeacherView from 'teacher';
 
 export default class extends Mn.View {
     constructor(option={}){
@@ -23,15 +23,16 @@ export default class extends Mn.View {
             // price: this.getPriceView,
             // course: this.getCourseView,
             // gift: this.getGiftView,
-            // news: this.getNewsView,
+            news: this.getNewsView,
             // teacher: this.getTeacherView,
         };
         this.partitionViews = {}
     }
 
-    getAboutView(){
+    async getAboutView(){
         if(!this.partitionViews['about']){
             this.partitionViews['about'] = new AboutView();
+            await this.partitionViews['about'].loadInfo();
         }
         return this.partitionViews['about']
     }
@@ -39,6 +40,7 @@ export default class extends Mn.View {
     // getPriceView(){
     //     if(!this.partitionViews['price']){
     //         this.partitionViews['price'] = new PriceView();
+    //         this.partitionViews['price'].loadInfo();
     //     }
     //     return this.partitionViews['price']
     // }
@@ -46,6 +48,7 @@ export default class extends Mn.View {
     // getCourseView(){
     //     if(!this.partitionViews['course']){
     //         this.partitionViews['course'] = new CourseView();
+    //         this.partitionViews['course'].loadInfo();
     //     }
     //     return this.partitionViews['course']
     // }
@@ -53,29 +56,34 @@ export default class extends Mn.View {
     // getGiftView(){
     //     if(!this.partitionViews['gift']){
     //         this.partitionViews['gift'] = new GiftView();
+    //         this.partitionViews['gift'].loadInfo();
     //     }
     //     return this.partitionViews['gift']
     // }
     //
-    // getNewsView(){
-    //     if(!this.partitionViews['news']){
-    //         this.partitionViews['news'] = new NewsView();
-    //     }
-    //     return this.partitionViews['news']
-    // }
+    getNewsView(){
+        if(!this.partitionViews['news']){
+            this.partitionViews['news'] = new NewsViews();
+            this.partitionViews['news'].loadInfo();
+        }
+        return this.partitionViews['news'];
+    }
     //
     // getTeacherView(){
     //     if(!this.partitionViews['teacher']){
     //         this.partitionViews['teacher'] = new TeacherView();
+    //         this.partitionViews['teacher'].loadInfo();
     //     }
     //     return this.partitionViews['teacher']
     // }
 
-    getContentView(partition){
-        this.partitionGetter[partition] || console.error("Нет данной категории на фронте")
+    async getContentView(partition){
+        await this.partitionGetter[partition]() || console.error("Нет данной категории на фронте")
     }
 
     switchView(partition){
-        this.showChildView('content', this.getContentView(partition));
+        this.getContentView(partition).then((view) =>{
+            this.showChildView('content', view);
+        }, (e) => console.log(e))
     }
 }
