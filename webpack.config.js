@@ -63,7 +63,7 @@ module.exports = {
             main: path.resolve(__dirname, 'static/src/components/main'),
             header: path.resolve(__dirname, 'static/src/components/header'),
             content: path.resolve(__dirname, 'static/src/components/content'),
-            // footer: path.resolve(__dirname, 'static/src/components/footer'),
+            footer: path.resolve(__dirname, 'static/src/components/footer'),
             about: path.resolve(__dirname, 'static/src/components/about'),
             // price: path.resolve(__dirname, 'static/src/components/price'),
             teacher: path.resolve(__dirname, 'static/src/components/teacher'),

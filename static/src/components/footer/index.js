@@ -8,18 +8,15 @@ export default class extends Mn.View {
         _.defaults(option, {
             template: FooterTemplate,
             className: 'footer-container-view',
-            regions: {
-                menu: '.menu-container',
-            }
         });
-        super(option)
+        super(option);
+        this.phone = option.phone;
     }
 
-    initMenu(){
-        // this.showChildView('menu', new HeaderView())
-    }
-
-    onRender(){
-        this.initMenu();
+    templateContext(){
+        return {
+            current_date: new Date().getFullYear(),
+            phone: this.phone,
+        }
     }
 }

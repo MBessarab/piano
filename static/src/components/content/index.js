@@ -3,10 +3,10 @@ import _ from 'underscore';
 import ContentTemplate from './template/content.hbs';
 import AboutView from 'about';
 // import PriceView from 'price';
-// import CourseView from 'course';
-// import GiftView from 'gift';
+import CourseView from 'course';
+import GiftView from 'gift';
 import NewsViews from 'news';
-// import TeacherView from 'teacher';
+import TeacherView from 'teacher';
 
 export default class extends Mn.View {
     constructor(option={}){
@@ -14,17 +14,17 @@ export default class extends Mn.View {
             template: ContentTemplate,
             className: 'content-container-view',
             regions: {
-                // menu: '.menu-container',
+                content: '.content',
             }
         });
         super(option);
         this.partitionGetter = {
             about: this.getAboutView,
             // price: this.getPriceView,
-            // course: this.getCourseView,
-            // gift: this.getGiftView,
+            course: this.getCourseView,
+            gift: this.getGiftView,
             news: this.getNewsView,
-            // teacher: this.getTeacherView,
+            teacher: this.getTeacherView,
         };
         this.partitionViews = {}
     }
@@ -44,23 +44,23 @@ export default class extends Mn.View {
     //     }
     //     return this.partitionViews['price']
     // }
-    //
-    // getCourseView(){
-    //     if(!this.partitionViews['course']){
-    //         this.partitionViews['course'] = new CourseView();
-    //         this.partitionViews['course'].loadInfo();
-    //     }
-    //     return this.partitionViews['course']
-    // }
-    //
-    // getGiftView(){
-    //     if(!this.partitionViews['gift']){
-    //         this.partitionViews['gift'] = new GiftView();
-    //         this.partitionViews['gift'].loadInfo();
-    //     }
-    //     return this.partitionViews['gift']
-    // }
-    //
+
+    getCourseView(){
+        if(!this.partitionViews['course']){
+            this.partitionViews['course'] = new CourseView();
+            this.partitionViews['course'].loadInfo();
+        }
+        return this.partitionViews['course']
+    }
+
+    getGiftView(){
+        if(!this.partitionViews['gift']){
+            this.partitionViews['gift'] = new GiftView();
+            this.partitionViews['gift'].loadInfo();
+        }
+        return this.partitionViews['gift']
+    }
+
     getNewsView(){
         if(!this.partitionViews['news']){
             this.partitionViews['news'] = new NewsViews();
@@ -68,14 +68,14 @@ export default class extends Mn.View {
         }
         return this.partitionViews['news'];
     }
-    //
-    // getTeacherView(){
-    //     if(!this.partitionViews['teacher']){
-    //         this.partitionViews['teacher'] = new TeacherView();
-    //         this.partitionViews['teacher'].loadInfo();
-    //     }
-    //     return this.partitionViews['teacher']
-    // }
+
+    getTeacherView(){
+        if(!this.partitionViews['teacher']){
+            this.partitionViews['teacher'] = new TeacherView();
+            this.partitionViews['teacher'].loadInfo();
+        }
+        return this.partitionViews['teacher']
+    }
 
     async getContentView(partition){
         await this.partitionGetter[partition]() || console.error("Нет данной категории на фронте")

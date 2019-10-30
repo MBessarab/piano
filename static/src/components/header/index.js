@@ -23,7 +23,10 @@ export default class extends Mn.View {
     templateContext(){
         return {
             partitions: this.partitions,
-            phone: this.phone,
+            phone: {
+                number: this.phone.number,
+                title: this.phone.title
+            },
         }
     }
 

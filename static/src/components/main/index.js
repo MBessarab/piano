@@ -2,9 +2,8 @@ import Mn from 'backbone.marionette';
 import _ from 'underscore';
 import MainViewTemplate from './template/main.hbs';
 import HeaderView from 'header';
-import $ from "jquery";
 import ContentView from 'content';
-// import FooterView from 'footer';
+import FooterView from 'footer';
 
 export default class extends Mn.View {
     constructor(option={}){
@@ -18,7 +17,7 @@ export default class extends Mn.View {
             }
         });
         super(option);
-        this.phone = "";
+        this.phone = {};
     }
 
     initHeader(partitions, self){
@@ -34,9 +33,11 @@ export default class extends Mn.View {
         }));
     }
 
-    // initFooter(){
-    //     this.showChildView('footer', new FooterView());
-    // }
+    initFooter(){
+        this.showChildView('footer', new FooterView({
+            phone: this.phone
+        }));
+    }
 
     initAllowPartitions(initHeader, initContent){
          return $.ajax(`${location.origin}/api/company/partition?active=True`, {
@@ -50,7 +51,7 @@ export default class extends Mn.View {
     }
 
     loadPhoneNumber(){
-        return $.ajax(`${location.origin}/api/company/contact?key=phone_number`, {
+        return $.ajax(`${location.origin}/api/company/contact?key=phone_number,phone_title`, {
             method: "GET",
         })
     }
@@ -58,11 +59,12 @@ export default class extends Mn.View {
     onRender(){
         this.loadPhoneNumber()
             .then((data) => {
-                this.phone = data[0].value;
+                this.phone['number'] = data.find(item => item.key === 'number');
+                this.phone['title'] = data.find(item => item.key === 'title');
+                this.initFooter();
                 return this.initAllowPartitions(
                         this.initHeader,
                         this.initContent,
-                        // this.initFooter
                     )
                 }
             )
