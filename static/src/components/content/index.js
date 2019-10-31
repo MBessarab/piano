@@ -19,22 +19,22 @@ export default class extends Mn.View {
         });
         super(option);
         this.partitionGetter = {
-            about: this.getAboutView(this),
+            about: this.getAboutView,
             // price: this.getPriceView(this),
-            course: this.getCourseView(this),
-            gift: this.getGiftView(this),
-            news: this.getNewsView(this),
-            teacher: this.getTeacherView(this),
+            course: this.getCourseView,
+            gift: this.getGiftView,
+            news: this.getNewsView,
+            teacher: this.getTeacherView,
         };
         this.partitionViews = {}
     }
 
-    async getAboutView(self){
-        if(!self.partitionViews['about']){
-            self.partitionViews['about'] = new AboutView();
-            await self.partitionViews['about'].loadInfo();
+    async getAboutView(){
+        if(!this.partitionViews['about']){
+            this.partitionViews['about'] = new AboutView();
+            await this.partitionViews['about'].loadInfo();
         }
-        return self.partitionViews['about']
+        return this.partitionViews['about']
     }
 
     // getPriceView(self){
@@ -45,40 +45,40 @@ export default class extends Mn.View {
     //     return self.partitionViews['price']
     // }
 
-    getCourseView(self){
-        if(!self.partitionViews['course']){
-            self.partitionViews['course'] = new CourseView();
-            self.partitionViews['course'].loadInfo();
+    getCourseView(){
+        if(!this.partitionViews['course']){
+            this.partitionViews['course'] = new CourseView();
+            this.partitionViews['course'].loadInfo();
         }
-        return self.partitionViews['course']
+        return this.partitionViews['course']
     }
 
-    getGiftView(self){
-        if(!self.partitionViews['gift']){
-            self.partitionViews['gift'] = new GiftView();
-            self.partitionViews['gift'].loadInfo();
+    getGiftView(){
+        if(!this.partitionViews['gift']){
+            this.partitionViews['gift'] = new GiftView();
+            this.partitionViews['gift'].loadInfo();
         }
-        return self.partitionViews['gift']
+        return this.partitionViews['gift']
     }
 
-    getNewsView(self){
-        if(!self.partitionViews['news']){
-            self.partitionViews['news'] = new NewsViews();
-            self.partitionViews['news'].loadInfo();
+    async getNewsView(){
+        if(!this.partitionViews['news']){
+            this.partitionViews['news'] = new NewsViews();
+            await this.partitionViews['news'].loadInfo();
         }
-        return self.partitionViews['news'];
+        return this.partitionViews['news'];
     }
 
-    getTeacherView(self){
-        if(!self.partitionViews['teacher']){
-            self.partitionViews['teacher'] = new TeacherView();
-            self.partitionViews['teacher'].loadInfo();
+    getTeacherView(){
+        if(!this.partitionViews['teacher']){
+            this.partitionViews['teacher'] = new TeacherView();
+            this.partitionViews['teacher'].loadInfo();
         }
-        return self.partitionViews['teacher']
+        return this.partitionViews['teacher']
     }
 
     async getContentView(partition){
-        await this.partitionGetter[partition] || console.error("Нет данной категории на фронте")
+        await this.partitionGetter[partition].bind(this)() || console.error("Нет данной категории на фронте")
     }
 
     switchView(partition){

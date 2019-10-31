@@ -6,6 +6,7 @@ import ArticleTemplate from './template/article.hbs';
 export class ArticlesView extends Mn.CollectionView {
     constructor(option={}){
         _.defaults(option, {
+            template: false,
             childView: ArticleItem,
             className: 'content-collection',
         });

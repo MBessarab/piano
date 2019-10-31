@@ -4,7 +4,7 @@ import _ from 'underscore';
 export default class extends ArticlesView {
     constructor(option={}){
         _.defaults(option, {
-            collection: TeacherCollection,
+            collection: new TeacherCollection(),
         });
         super(option);
     }

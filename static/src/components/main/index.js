@@ -51,7 +51,7 @@ export default class extends Mn.View {
     }
 
     loadPhoneNumber(){
-        return $.ajax(`${location.origin}/api/company/contact?key=phone_number,phone_title`, {
+        return $.ajax(`${location.origin}/api/company/contact?key__in=phone_number,phone_title`, {
             method: "GET",
         })
     }
@@ -86,7 +86,6 @@ export default class extends Mn.View {
     }
 
     switcherView(partition){
-        debugger
         this.switchViewContent(partition);
         this.switchViewHeader(partition)
     }
