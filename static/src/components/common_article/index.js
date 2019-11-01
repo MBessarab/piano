@@ -11,9 +11,6 @@ export class ArticlesView extends Mn.CollectionView {
             className: 'content-collection',
         });
         super(option);
-    }
-
-    loadInfo(){
         this.collection.fetch();
     }
 }

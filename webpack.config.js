@@ -65,7 +65,7 @@ module.exports = {
             content: path.resolve(__dirname, 'static/src/components/content'),
             footer: path.resolve(__dirname, 'static/src/components/footer'),
             about: path.resolve(__dirname, 'static/src/components/about'),
-            // price: path.resolve(__dirname, 'static/src/components/price'),
+            price: path.resolve(__dirname, 'static/src/components/price'),
             teacher: path.resolve(__dirname, 'static/src/components/teacher'),
             course: path.resolve(__dirname, 'static/src/components/course'),
             news: path.resolve(__dirname, 'static/src/components/news'),
