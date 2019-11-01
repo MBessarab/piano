@@ -1,10 +1,27 @@
 from django.db import models
 
 
+class TypeService(models.Model):
+    title = models.CharField(
+        max_length=255,
+        verbose_name='Название услуги',
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'type_service'
+        verbose_name = 'Услуга'
+        verbose_name_plural = 'Услуги'
+
+
 class Price(models.Model):
 
-    name = models.CharField(
-        max_length=255,
+    service = models.ForeignKey(
+        TypeService,
+        on_delete=models.CASCADE,
         verbose_name='Услуга',
     )
 
@@ -27,9 +44,9 @@ class Price(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return f'${self.service.title} ${self.time}'
 
     class Meta:
         db_table = 'price'
-        verbose_name = 'Цены'
+        verbose_name = 'Цена'
         verbose_name_plural = 'Цены'

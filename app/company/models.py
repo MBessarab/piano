@@ -23,7 +23,7 @@ class ContactProperty(models.Model):
 
     class Meta:
         db_table = 'contact_property'
-        verbose_name = 'Свойства компании'
+        verbose_name = 'Свойство'
         verbose_name_plural = 'Свойства компании'
 
 
@@ -55,7 +55,7 @@ class Partition(models.Model):
 
     class Meta:
         db_table = 'partition'
-        verbose_name = 'Разделы'
+        verbose_name = 'Раздел'
         verbose_name_plural = 'Разделы'
 
 

@@ -5,5 +5,5 @@ class Course(PartitionArticleAbs):
 
     class Meta(PartitionArticleAbs.Meta):
         db_table = 'course'
-        verbose_name = 'Курсы'
+        verbose_name = 'Курс'
         verbose_name_plural = 'Курсы'

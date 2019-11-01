@@ -22,5 +22,5 @@ class Claim(models.Model):
 
     class Meta:
         db_table = 'claim'
-        verbose_name = 'Заявки'
+        verbose_name = 'Заявка'
         verbose_name_plural = 'Заявки'
