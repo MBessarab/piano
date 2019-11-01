@@ -57,7 +57,7 @@ export default class extends Mn.View {
         return this.partitionViews['gift'];
     }
 
-    async getNewsView(){
+    getNewsView(){
         if(!this.partitionViews['news']){
             this.partitionViews['news'] = new NewsViews();
         }
