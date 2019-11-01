@@ -19,11 +19,7 @@ class TypeService(models.Model):
 
 class Price(models.Model):
 
-    service = models.ForeignKey(
-        TypeService,
-        on_delete=models.CASCADE,
-        verbose_name='Услуга',
-    )
+    service = models.ManyToManyField(TypeService)
 
     price = models.PositiveIntegerField(
         verbose_name='Цена',
