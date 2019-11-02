@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from app.price.models import TypeService
+from app.price.models import Price
 
 
 class PriceSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = TypeService
+        model = Price
         fields = '__all__'

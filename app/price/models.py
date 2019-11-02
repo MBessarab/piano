@@ -8,6 +8,8 @@ class TypeService(models.Model):
         unique=True,
     )
 
+    order = models.PositiveIntegerField()
+
     def __str__(self):
         return self.title
 
@@ -25,12 +27,17 @@ class Price(models.Model):
         verbose_name='Тип услуги',
     )
 
+    description = models.CharField(
+        max_length=255,
+        verbose_name='Описание'
+    )
+
     price = models.PositiveIntegerField(
         verbose_name='Цена',
     )
 
     time = models.PositiveIntegerField(
-        verbose_name='Время',
+        verbose_name='Время (мин)',
     )
 
     active = models.BooleanField(
@@ -44,7 +51,7 @@ class Price(models.Model):
     )
 
     def __str__(self):
-        return f'${self.service.title} ${self.time} ${self.price}'
+        return f'{self.service.title} {self.time} {self.price}'
 
     class Meta:
         db_table = 'price'
