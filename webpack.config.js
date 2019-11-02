@@ -62,6 +62,7 @@ module.exports = {
             static: path.resolve(__dirname, 'static/src'),
             main: path.resolve(__dirname, 'static/src/components/main'),
             header: path.resolve(__dirname, 'static/src/components/header'),
+            menu: path.resolve(__dirname, 'static/src/components/menu'),
             content: path.resolve(__dirname, 'static/src/components/content'),
             footer: path.resolve(__dirname, 'static/src/components/footer'),
             about: path.resolve(__dirname, 'static/src/components/about'),

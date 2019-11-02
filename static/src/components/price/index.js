@@ -1,4 +1,5 @@
 import Mn from 'backbone.marionette';
+import Bb from 'backbone';
 import _ from 'underscore';
 import CollectionTemplate from './template/price_collection.hbs';
 import ItemTemplate from './template/price_item.hbs';
@@ -44,7 +45,7 @@ class PriceView extends Mn.View{
     }
 }
 
-class PriceCollection {
+class PriceCollection extends Bb.Collection{
     url(){
         return `${location.origin}/api/price`
     }

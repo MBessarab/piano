@@ -154,7 +154,7 @@ def filling():
     partition()
     teacher()
     course()
-    price()
+    # price()
     gift()
     news()
     main_page()

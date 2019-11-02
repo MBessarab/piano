@@ -16,17 +16,15 @@ export default class extends Mn.View {
             }
         });
         super(option);
-        this.partitions = option['partitions'];
         this.phone = option['phone'];
     }
 
     templateContext(){
         return {
-            partitions: this.partitions,
-            phone: {
-                number: this.phone.number,
-                title: this.phone.title
-            },
+            // phone: {
+            //     number: this.phone.number,
+            //     title: this.phone.title
+            // },
         }
     }
 

@@ -9,13 +9,13 @@ import _ from 'underscore';
 
 class App extends Mn.Application {
     onStart() {
-        window.appView = new View();
-        this.showView(window.appView);
         new Router();
         Bb.history.start();
     }
 }
 
+
+window.appView = new View();
 window.app = new App({ region: '#main-container' });
 
 $(() => {
@@ -26,6 +26,7 @@ class Router extends Backbone.Router {
 	constructor(option={}){
         _.defaults(option, {
             routes: {
+                '': 'main',
                 'about' : 'about',
                 'course' : 'course',
                 'price' : 'price',
@@ -37,27 +38,43 @@ class Router extends Backbone.Router {
         super(option);
     }
 
+    showAppView(){
+	    if(!window.app.getView()){
+	        window.app.showView(window.appView);
+        }
+    }
+
+    showView(partition){
+	    this.showAppView();
+        appView.switcherView(partition);
+    }
+
+    main(){
+	    this.showAppView();
+	    window.appView.switchToMainPage();
+    }
+
 	about(){
-	    appView.switcherView('about')
+	    this.showView('about')
     }
 
 	course(){
-	    appView.switcherView('course')
+	    this.showView('course')
     }
 
 	gift(){
-	    appView.switcherView('gift')
+	    this.showView('gift')
     }
 
 	teacher(){
-	    appView.switcherView('teacher')
+	    this.showView('teacher')
     }
 
 	price(){
-	    appView.switcherView('price')
+	    this.showView('price')
     }
 
 	news(){
-	    appView.switcherView('news')
+	    this.showView('news')
     }
 }

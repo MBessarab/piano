@@ -37,4 +37,4 @@ class MainPageView(viewsets.ModelViewSet):
             response = json.dumps({
                 'error': 'В базе больше одной записи!',
             })
-            Response(json.loads(response), HTTPStatus.INTERNAL_SERVER_ERROR)
+            return Response(json.loads(response), HTTPStatus.INTERNAL_SERVER_ERROR)
