@@ -1,4 +1,5 @@
 import Mn from 'backbone.marionette';
+import Bb from 'backbone';
 import _ from 'underscore';
 import AboutTemplate from './template/about.hbs';
 
@@ -6,24 +7,34 @@ export default class extends Mn.View {
     constructor(option={}){
         _.defaults(option, {
             template: AboutTemplate,
+            model: new AboutModel(),
             className: 'about-container-view',
-            regions: {
-                // menu: '.menu-container',
-            }
         });
         super(option);
-        this.data = undefined;
+    }
+
+    loadData(){
+        return this.model.fetch();
     }
 
     templateContext(){
+        let dataModel = [];
+        for (let i in this.model.attributes){
+            let obj = {};
+            obj[this.model.attributes[i].key] = this.model.attributes[i].value;
+
+            obj['order'] = this.model.attributes[i].order;
+            dataModel.push(obj);
+        }
+        dataModel.sort((a, b) => b.order - a.order);
         return {
-            data: this.data,
+            data: dataModel,
         };
     }
+}
 
-    loadInfo(){
-        return $.ajax(`${location.origin}/api/company/contact`, {
-            method: 'GET',
-        }).then((data) => this.data = data)
+class AboutModel extends Bb.Model {
+    url(){
+        return `${location.origin}/api/company/contact`
     }
 }

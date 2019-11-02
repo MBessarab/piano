@@ -61,6 +61,6 @@ export default class extends Mn.View {
 
     switchView(partition){
         let view = this.getContentView(partition);
-        this.showChildView('content', view);
+        view.loadData().then(() => this.showChildView('content', view));
     }
 }

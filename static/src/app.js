@@ -9,11 +9,11 @@ import _ from 'underscore';
 
 class App extends Mn.Application {
     onStart() {
+        this.showView(window.appView);
         new Router();
         Bb.history.start();
     }
 }
-
 
 window.appView = new View();
 window.app = new App({ region: '#main-container' });
@@ -38,19 +38,11 @@ class Router extends Backbone.Router {
         super(option);
     }
 
-    showAppView(){
-	    if(!window.app.getView()){
-	        window.app.showView(window.appView);
-        }
-    }
-
     showView(partition){
-	    this.showAppView();
         appView.switcherView(partition);
     }
 
     main(){
-	    this.showAppView();
 	    window.appView.switchToMainPage();
     }
 

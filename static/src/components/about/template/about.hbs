@@ -1,18 +1,19 @@
-ABOUT
+{{#each data}}
 
-{{#if data.address}}
-    <div class="address">{{data.address}}</div>
-{{/if}}
+    {{#if address }}
+        <div class="address">{{address}}</div>
+    {{/if}}
 
-{{#if data.email}}
-    <div class="email">{{data.email}}</div>
-{{/if}}
+    {{#if email}}
+        <div class="email">{{email}}</div>
+    {{/if}}
 
-{{#if data.map_widget_code}}
-    <div class="map_widget_code">{{data.map_widget_code}}</div>
-{{/if}}
+    {{#if map_widget_code}}
+        <div class="map_widget_code">{{{map_widget_code}}}</div>
+    {{/if}}
 
+    {{#if phone_title }}
+        <a href="tel:{{phone_number}}" class="phone_title">{{phone_title}}</a>
+    {{/if}}
 
-{{#if data.phone_title }}
-    <a href="tel:{{data.phone_number}}" class="phone_title">{{data.phone_title}}</a>
-{{/if}}
+{{/each}}
