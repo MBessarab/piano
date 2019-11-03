@@ -27,19 +27,24 @@ def info_property():
             value="""
                 <script src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script>
                 <script>
+                    let counter = 0;
                     let interval = setInterval(()=>{
-                    if(window.DGWidgetLoader){
-                        new DGWidgetLoader({
-                            "width": 640,
-                            "height": 600,
-                            "borderColor": "#a3a3a3",
-                            "pos": {"lat": 47.219826, "lon": 39.685563, "zoom": 16},
-                            "opt": {"city": "rostov"},
-                            "org": [{"id": "70000001007492088"}]
-                        });
-                        clearInterval(interval);
-                    }
-                    }, 10)
+                        counter = counter + 1;
+                        if(counter > 5) {
+                            clearInterval(interval);
+                        }
+                        if(window.DGWidgetLoader){
+                            new DGWidgetLoader({
+                                "width": 640,
+                                "height": 600,
+                                "borderColor": "#a3a3a3",
+                                "pos": {"lat": 47.219826, "lon": 39.685563, "zoom": 16},
+                                "opt": {"city": "rostov"},
+                                "org": [{"id": "70000001007492088"}]
+                            });
+                            clearInterval(interval);
+                        }
+                    }, 800)
                 </script>
                 <noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в
                     настройках вашего браузера.

@@ -75,6 +75,6 @@ export default class extends Mn.View {
 
 class ModelPhone extends Bb.Model{
     url(){
-        return `${location.origin}/api/company/contact?key__in=phone_number,phone_title`;
+        return '/api/company/contact?key__in=phone_number,phone_title';
     }
 }

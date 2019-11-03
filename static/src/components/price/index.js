@@ -47,7 +47,7 @@ class PriceView extends Mn.View{
 
 class PriceCollection extends Bb.Collection{
     url(){
-        return `${location.origin}/api/price`
+        return '/api/price';
     }
 }
 

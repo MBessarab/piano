@@ -35,6 +35,6 @@ export default class extends Mn.View {
 
 class AboutModel extends Bb.Model {
     url(){
-        return `${location.origin}/api/company/contact`
+        return '/api/company/contact';
     }
 }

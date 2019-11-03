@@ -29,7 +29,7 @@ export default class extends Mn.CollectionView {
 
 class CollectionMenuItems extends Bb.Collection{
     url(){
-        return `${location.origin}/api/company/partition?active=True`;
+        return '/api/company/partition?active=True';
     }
 }
 

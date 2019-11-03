@@ -12,6 +12,6 @@ export default class extends ArticlesView {
 
 class CourseCollection extends CollectionArticles {
     url(){
-        return `${location.origin}/api/course`;
+        return '/api/course';
     }
 }
