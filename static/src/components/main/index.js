@@ -6,6 +6,7 @@ import HeaderView from 'header';
 import ContentView from 'content';
 import FooterView from 'footer';
 import MenuView from 'menu';
+import './template/main.styl';
 
 export default class extends Mn.View {
     constructor(option = {}) {
@@ -14,7 +15,7 @@ export default class extends Mn.View {
             className: 'views-container',
             regions: {
                 header: '.header-container',
-                menu: '.manu-container',
+                menu: '.menu-container',
                 content: '.content-container',
                 footer: '.footer-container',
             }
